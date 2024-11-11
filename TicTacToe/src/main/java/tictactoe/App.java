@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) {
 
         Game g = new Game();
-        
+
     } // end of main method
 
 } // end of App class
@@ -21,6 +21,16 @@ class Game {
 } // end of Game class
 
 class Grid {
+
+    int[] board;
+    int[] occupiedSpaces;
+
+    Grid(int rows, int columns) {
+
+        // initializes and prints game board
+        
+
+    } // end of Grid method
 
 } // end of Grid class
 
