@@ -2,4 +2,5 @@ tictactoe\ComputerPlayer.class
 tictactoe\HumanPlayer.class
 tictactoe\App.class
 tictactoe\Game.class
-tictactoe\Grid.class
+tictactoe\Player.class
+tictactoe\Board.class
