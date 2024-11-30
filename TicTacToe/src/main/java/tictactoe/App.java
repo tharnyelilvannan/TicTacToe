@@ -2,16 +2,15 @@ package tictactoe;
 
 /**
  * Author: Tharny Elilvannan
- * Last Updated: November 26, 2024
+ * Last Updated: November 28, 2024
  * Purpose: Tic Tac Toe game.
  */
-
 
 public class App {
 
     public static void main(String[] args) {
 
-        Game g = new Game();
+        Game game = new Game();
 
     } // end of main method
 
@@ -52,7 +51,7 @@ class Board {
     private String row2;
     private String row3;
     private String divider = "-----------";
-    private int[] board = new int[9];
+    private int[] board = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     Board() {
 
@@ -79,7 +78,7 @@ class Board {
             }
             else if ("O".equals(marker)) {
 
-                board[position] = 0;
+                board[position] = 2;
 
             }
             else {
