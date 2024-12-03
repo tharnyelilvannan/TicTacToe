@@ -1,6 +1,7 @@
 tictactoe\ComputerPlayer.class
-tictactoe\HumanPlayer.class
 tictactoe\App.class
 tictactoe\Game.class
 tictactoe\Player.class
+tictactoe\HumanPlayer.class
+tictactoe\ImprovedBoard.class
 tictactoe\Board.class
