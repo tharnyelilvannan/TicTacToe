@@ -2,18 +2,60 @@ package tictactoe;
 
 /**
  * Author: Tharny Elilvannan
- * Last Updated: December 02, 2024
+ * Last Updated: December 03, 2024
  * Purpose: Tic Tac Toe game.
  */
 
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Random;
 
 public class App {
 
     public static void main(String[] args) {
 
-        Game game = new Game();
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Would you like to play against a computer or a player?\nPress 1 for human.\nPress 2 for computer.");
+        System.out.println("If you would like to play computer vs. computer, press 3.\n");
+
+        int humanOrComputer = input.nextInt();
+
+        boolean valid = false;
+
+        while (!valid) {
+            try {
+                if (humanOrComputer == 1) {
+
+                    Game game = new Game();
+                    valid = true;
+
+                }
+                else if (humanOrComputer == 2) {
+
+                    Game game = new Game();
+                    valid = true;
+
+                }
+                else if (humanOrComputer == 3) {
+
+                    Game game = new Game();
+
+                }
+                else {
+
+                    throw new Exception("Invalid opponent selection.");
+
+                } // end of if/else statement
+
+            }
+            catch (Exception t) {
+
+                System.out.println(t.getMessage());
+
+            } // end of try/catch statement
+
+        } // end of while loop
 
     } // end of main method
 
@@ -24,12 +66,13 @@ class Game {
 
     Game() {
 
-        ImprovedBoard board = new ImprovedBoard();
-        HumanPlayer player1 = new HumanPlayer("X", "Player 1");
-        HumanPlayer player2 = new HumanPlayer("O", "Player 2");
-
         Scanner input = new Scanner(System.in);
 
+        ImprovedBoard board = new ImprovedBoard();
+
+        Player player1 = new HumanPlayer("X", "Player 1");
+        Player player2 = new HumanPlayer("O", "Player 2");
+                
         board.printBoard();
 
         int row = 0;
@@ -49,17 +92,7 @@ class Game {
 
                     row = player1.row();
 
-                    System.out.println("Column: ");
-                    col = input.nextInt();
-
-                    // assume user will enter columns as 1, 2, or 3
-                    col = col - 1;
-
-                    if (row >= 3 || col >= 3) {
-
-                        throw new Exception("Row and column value must be 1, 2, or 3.");
-
-                    } // end of if statement
+                    col = player1.col();
 
                     try {
 
@@ -90,19 +123,9 @@ class Game {
 
                     System.out.println("\n" + player2.getName() + ", where would you like to play?\n");
 
-                    System.out.println("Row: ");
-                    row = input.nextInt();
-
-                    // assume user will enter rows as 1, 2, or 3
-                    row = row - 1; 
+                    row = player2.row(); 
 
                     col = player2.col();
-
-                    if (row >= 3 || col >= 3) {
-
-                        throw new Exception("Row and column value must be 1, 2, or 3.");
-
-                    } // end of if statement
 
                     try {
 
@@ -185,56 +208,62 @@ abstract class Player {
 
 class Board {
 
-    protected String[][] board = {{"*", "*", "*"}, {"*", "*", "*"}, {"*", "*", "*"}};
+    String[][] board = {{"*", "*", "*"}, {"*", "*", "*"}, {"*", "*", "*"}};
     
-        public void printBoard() {
-    
-            System.out.println(Arrays.toString(board[0]));
-            System.out.println(Arrays.toString(board[1]));
-            System.out.println(Arrays.toString(board[2]));
-    
-        } // end of printBoard method
-    
-        public void addMarker(int row, int col, String marker) {
-    
-            try {
-    
-                if ("X".equals(marker)) {
-    
-                    board[row][col] = "X";
-    
-                }
-                else if ("O".equals(marker)) {
-    
-                    board[row][col] = "O";
-    
-                }
-                else {
-    
-                    throw new Exception("Invalid marker.");
-    
-                } // end of if/else statement
-    
-            } 
-            catch (Exception e) {
-    
-                System.err.println(e.getMessage());
-    
-            } // end of try/catch statement
-    
-        } // end of addMarker method
-    
-        public void checkBoard(int row, int col) throws Exception {
-    
-            if (board[row][col] != "*") {
-    
-                throw new Exception("Position already filled.\n");
-    
-            } // end of if statement
-    
-        } // end of checkBoard method
-    
-    } // end of Board class
+    Board() {
+
+    } // end of Board method
+
+    public void printBoard() {
+
+        for (int i = 0; i < board.length; i++) {
+            
+            System.out.println(Arrays.toString(board[i]));
+
+        } // end of for loop
+
+    } // end of printBoard method
+
+    public void addMarker(int row, int col, String marker) {
+
+        try {
+
+            if ("X".equals(marker)) {
+
+                board[row][col] = "X";
+
+            }
+            else if ("O".equals(marker)) {
+
+                board[row][col] = "O";
+
+            }
+            else {
+
+                throw new Exception("Invalid marker.");
+
+            } // end of if/else statement
+
+        } 
+        catch (Exception e) {
+
+            System.err.println(e.getMessage());
+
+        } // end of try/catch statement
+
+    } // end of addMarker method
+
+    public void checkBoard(int row, int col) throws Exception {
+
+        if (board[row][col] != "*") {
+
+            throw new Exception("Position already filled.\n");
+
+        } // end of if statement
+
+    } // end of checkBoard method
+
+} // end of Board class
     
     
 class HumanPlayer extends Player {
@@ -288,6 +317,8 @@ class HumanPlayer extends Player {
 
 class ComputerPlayer extends Player {
 
+    Random random = new Random();
+
     ComputerPlayer(String marker, String name) {
 
         super(marker, name);
@@ -296,13 +327,17 @@ class ComputerPlayer extends Player {
 
     int row() throws Exception {
         
-        return 1;
+        int row = random.nextInt(4);
+
+        return row;
 
     } // end of row method
 
     int col() throws Exception {
 
-        return 1;
+        int col = random.nextInt(4);
+
+        return col;
 
     } // end of col method
 
@@ -310,6 +345,12 @@ class ComputerPlayer extends Player {
 
 
 class ImprovedBoard extends Board {
+
+    ImprovedBoard() {
+
+        super();
+
+    } // end of ImprovedBoard method
 
     public boolean checkWin(String marker) {
 
