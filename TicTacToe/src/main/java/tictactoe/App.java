@@ -25,8 +25,8 @@ class Game {
     Game() {
 
         ImprovedBoard board = new ImprovedBoard();
-        Player player1 = new Player("X", "Player 1");
-        Player player2 = new Player("O", "Player 2");
+        HumanPlayer player1 = new HumanPlayer("X", "Player 1");
+        HumanPlayer player2 = new HumanPlayer("O", "Player 2");
 
         Scanner input = new Scanner(System.in);
 
@@ -47,11 +47,7 @@ class Game {
 
                     System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
 
-                    System.out.println("Row: ");
-                    row = input.nextInt();
-
-                    // assume user will enter rows as 1, 2, or 3
-                    row = row - 1; 
+                    row = player1.row();
 
                     System.out.println("Column: ");
                     col = input.nextInt();
@@ -100,11 +96,7 @@ class Game {
                     // assume user will enter rows as 1, 2, or 3
                     row = row - 1; 
 
-                    System.out.println("Column: ");
-                    col = input.nextInt();
-
-                    // assume user will enter columns as 1, 2, or 3
-                    col = col - 1;
+                    col = player2.col();
 
                     if (row >= 3 || col >= 3) {
 
@@ -160,7 +152,7 @@ class Game {
 } // end of Game class
 
 
-class Player {
+abstract class Player {
 
     private String marker = "";
     private String name = "";
@@ -183,6 +175,10 @@ class Player {
         return this.marker;
 
     } // end of getMarker method
+
+    abstract int row() throws Exception;
+
+    abstract int col() throws Exception;
 
 } // end of Player class
 
@@ -242,12 +238,50 @@ class Board {
     
     
 class HumanPlayer extends Player {
+
+    Scanner input = new Scanner(System.in);
     
     HumanPlayer(String marker, String name) {
 
         super(marker, name);
 
     } // end of HumanPlayer method
+
+    int row() throws Exception {
+
+        System.out.println("Row: ");
+        int row = input.nextInt();
+
+        // assume user will enter rows as 1, 2, or 3
+        row = row - 1; 
+
+        if (row >= 3) {
+
+            throw new Exception("Row value must be 1, 2, or 3.");
+
+        } // end of if statement
+
+        return row;
+
+    } // end of row method
+
+    int col() throws Exception {
+
+        System.out.println("Column: ");
+        int col = input.nextInt();
+
+        // assume user will enter columns as 1, 2, or 3
+        col = col - 1;
+
+        if (col >= 3) {
+
+            throw new Exception("Column value must be 1, 2, or 3.");
+
+        } // end of if statement
+
+        return col;
+
+    } // end of col method
 
 } // end of HumanPlayer class
 
@@ -259,6 +293,18 @@ class ComputerPlayer extends Player {
         super(marker, name);
 
     } // end of ComputerPlayer method
+
+    int row() throws Exception {
+        
+        return 1;
+
+    } // end of row method
+
+    int col() throws Exception {
+
+        return 1;
+
+    } // end of col method
 
 } // end of ComputerPlayer class
 
