@@ -66,6 +66,7 @@ public class App {
 
 class Game {
 
+    // plays a human vs. human game
     Game() {
 
         Scanner input = new Scanner(System.in);
@@ -108,7 +109,7 @@ class Game {
 
                         if (win) {
 
-                            System.out.println("Player 1 wins!\n");
+                            System.out.println("\nPlayer 1 wins!\n");
 
                         } // end of if statement
 
@@ -141,7 +142,7 @@ class Game {
 
                         if (win) {
 
-                            System.out.println("Player 2 wins!\n");
+                            System.out.println("\nPlayer 2 wins!\n");
 
                         } // end of if statement
 
@@ -174,6 +175,7 @@ class Game {
 
     } // end of Game method
 
+    // plays a human vs. computer game
     Game(int selection) {
 
         Scanner input = new Scanner(System.in);
@@ -216,7 +218,7 @@ class Game {
 
                         if (win) {
 
-                            System.out.println("Player 1 wins!\n");
+                            System.out.println("\nPlayer 1 wins!\n");
 
                         } // end of if statement
 
@@ -231,7 +233,7 @@ class Game {
                 }
                 else if (currentPlayer == 2) {
 
-                    System.out.println("\n" + player2.getName() + ", where would you like to play?\n");
+                    System.out.println("\nComputer's Turn\n");
 
                     row = player2.row(); 
 
@@ -249,7 +251,7 @@ class Game {
 
                         if (win) {
 
-                            System.out.println("Player 2 wins!\n");
+                            System.out.println("\nPlayer 2 wins!\n");
 
                         } // end of if statement
 
@@ -258,7 +260,7 @@ class Game {
                     }
                     catch (Exception c) {
                         
-                        System.out.println(c.getMessage());
+                        //System.err.println(c.getMessage());
 
                     } // end of try/catch statement
 
@@ -282,6 +284,7 @@ class Game {
 
     } // end of Game method
 
+    // plays a computer vs. computer game
     Game(boolean selection) {
 
         Scanner input = new Scanner(System.in);
@@ -324,7 +327,7 @@ class Game {
 
                         if (win) {
 
-                            System.out.println("Player 1 wins!\n");
+                            System.out.println("\nPlayer 1 wins!\n");
 
                         } // end of if statement
 
@@ -333,7 +336,7 @@ class Game {
                     }
                     catch (Exception x) {
                         
-                        System.out.println(x.getMessage());
+                        //System.err.println(x.getMessage());
 
                     } // end of try/catch statement
                 }
@@ -357,7 +360,7 @@ class Game {
 
                         if (win) {
 
-                            System.out.println("Player 2 wins!\n");
+                            System.out.println("\nPlayer 2 wins!\n");
 
                         } // end of if statement
 
@@ -366,7 +369,7 @@ class Game {
                     }
                     catch (Exception c) {
                         
-                        System.out.println(c.getMessage());
+                        //System.err.println(c.getMessage());
 
                     } // end of try/catch statement
 
