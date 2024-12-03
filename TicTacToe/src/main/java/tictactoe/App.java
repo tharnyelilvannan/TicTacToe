@@ -59,6 +59,8 @@ public class App {
 
         } // end of while loop
 
+        input.close();
+
     } // end of main method
 
 } // end of App class
@@ -75,99 +77,115 @@ class Game {
 
         Player player1 = new HumanPlayer("X", "Player 1");
         Player player2 = new HumanPlayer("O", "Player 2");
-                
-        board.printBoard();
+        
+        boolean playAgain = true;
 
-        int row = 0;
-        int col = 0;
+        while (playAgain) {
 
-        int currentPlayer = 1;
+            board.printBoard();
 
-        boolean win = false;
+            int row = 0;
+            int col = 0;
 
-        while (!win) {
+            int currentPlayer = 1;
 
-            try {
+            boolean win = false;
 
-                if (currentPlayer == 1) {
+            while (!win) {
 
-                    System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
+                try {
 
-                    row = player1.row();
+                    if (currentPlayer == 1) {
 
-                    col = player1.col();
+                        System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
 
-                    try {
+                        try {
 
-                        board.checkBoard(row, col);
+                            row = player1.row();
 
-                        board.addMarker(row, col, player1.getMarker());
+                            col = player1.col();
 
-                        board.printBoard();
+                            board.checkBoard(row, col);
 
-                        win = board.checkWin(player1.getMarker());
+                            board.addMarker(row, col, player1.getMarker());
 
-                        if (win) {
+                            board.printBoard();
 
-                            System.out.println("\nPlayer 1 wins!\n");
+                            win = board.checkWin(player1.getMarker());
 
-                        } // end of if statement
+                            if (win) {
 
-                        currentPlayer = 2;
+                                System.out.println("\nPlayer 1 wins!\n");
 
+                            } // end of if statement
+
+                            currentPlayer = 2;
+
+                        }
+                        catch (Exception x) {
+                            
+                            System.out.println(x.getMessage());
+
+                        } // end of try/catch statement
                     }
-                    catch (Exception x) {
-                        
-                        System.out.println(x.getMessage());
+                    else if (currentPlayer == 2) {
 
-                    } // end of try/catch statement
+                        System.out.println("\n" + player2.getName() + ", where would you like to play?\n");
+
+                        try {
+
+                            row = player2.row(); 
+
+                            col = player2.col();
+
+                            board.checkBoard(row, col);
+
+                            board.addMarker(row, col, player2.getMarker());
+
+                            board.printBoard();
+
+                            win = board.checkWin(player2.getMarker());
+
+                            if (win) {
+
+                                System.out.println("\nPlayer 2 wins!\n");
+
+                            } // end of if statement
+
+                            currentPlayer = 1;
+
+                        }
+                        catch (Exception c) {
+                            
+                            System.out.println(c.getMessage());
+
+                        } // end of try/catch statement
+
+                    } 
+                    else {
+
+                        throw new Exception("Invalid Player.");
+
+                    } // end of if/else statement
+
                 }
-                else if (currentPlayer == 2) {
+                catch (Exception p) {
 
-                    System.out.println("\n" + player2.getName() + ", where would you like to play?\n");
+                    System.out.println(p.getMessage());
 
-                    row = player2.row(); 
+                } // end of try/catch statement
 
-                    col = player2.col();
+            } // end of while loop
 
-                    try {
+            System.out.println("Do you want to play again? Type true for yes. Type false for no.\n");
 
-                        board.checkBoard(row, col);
+            playAgain = input.nextBoolean();
 
-                        board.addMarker(row, col, player2.getMarker());
+            if (playAgain) {
 
-                        board.printBoard();
+                board.clearBoard();
 
-                        win = board.checkWin(player2.getMarker());
-
-                        if (win) {
-
-                            System.out.println("\nPlayer 2 wins!\n");
-
-                        } // end of if statement
-
-                        currentPlayer = 1;
-
-                    }
-                    catch (Exception c) {
-                        
-                        System.out.println(c.getMessage());
-
-                    } // end of try/catch statement
-
-                } 
-                else {
-
-                    throw new Exception("Invalid Player.");
-
-                } // end of if/else statement
-
-            }
-            catch (Exception p) {
-
-                System.out.println(p.getMessage());
-
-            } // end of try/catch statement
+            } // end of if statement
 
         } // end of while loop
 
@@ -184,99 +202,115 @@ class Game {
 
         Player player1 = new HumanPlayer("X", "Player 1");
         Player player2 = new ComputerPlayer("O", "Player 2");
+
+        boolean playAgain = true;
                 
-        board.printBoard();
+        while (playAgain) {
 
-        int row = 0;
-        int col = 0;
+            board.printBoard();
 
-        int currentPlayer = 1;
+            int row = 0;
+            int col = 0;
 
-        boolean win = false;
+            int currentPlayer = 1;
 
-        while (!win) {
+            boolean win = false;
 
-            try {
+            while (!win) {
 
-                if (currentPlayer == 1) {
+                try {
 
-                    System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
+                    if (currentPlayer == 1) {
 
-                    row = player1.row();
+                        System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
 
-                    col = player1.col();
+                        try {
 
-                    try {
+                            row = player1.row();
 
-                        board.checkBoard(row, col);
+                            col = player1.col();
 
-                        board.addMarker(row, col, player1.getMarker());
+                            board.checkBoard(row, col);
 
-                        board.printBoard();
+                            board.addMarker(row, col, player1.getMarker());
 
-                        win = board.checkWin(player1.getMarker());
+                            board.printBoard();
 
-                        if (win) {
+                            win = board.checkWin(player1.getMarker());
 
-                            System.out.println("\nPlayer 1 wins!\n");
+                            if (win) {
 
-                        } // end of if statement
+                                System.out.println("\nPlayer 1 wins!\n");
 
-                        currentPlayer = 2;
+                            } // end of if statement
 
+                            currentPlayer = 2;
+
+                        }
+                        catch (Exception x) {
+                            
+                            System.out.println(x.getMessage());
+
+                        } // end of try/catch statement
                     }
-                    catch (Exception x) {
-                        
-                        System.out.println(x.getMessage());
+                    else if (currentPlayer == 2) {
 
-                    } // end of try/catch statement
+                        //System.out.println("\nComputer's Turn\n");
+
+                        try {
+
+                            row = player2.row(); 
+
+                            col = player2.col();
+
+                            board.checkBoard(row, col);
+
+                            board.addMarker(row, col, player2.getMarker());
+
+                            board.printBoard();
+
+                            win = board.checkWin(player2.getMarker());
+
+                            if (win) {
+
+                                System.out.println("\nPlayer 2 wins!\n");
+
+                            } // end of if statement
+
+                            currentPlayer = 1;
+
+                        }
+                        catch (Exception c) {
+                            
+                            //System.err.println(c.getMessage());
+
+                        } // end of try/catch statement
+
+                    } 
+                    else {
+
+                        throw new Exception("Invalid Player.");
+
+                    } // end of if/else statement
+
                 }
-                else if (currentPlayer == 2) {
+                catch (Exception p) {
 
-                    System.out.println("\nComputer's Turn\n");
+                    System.out.println(p.getMessage());
 
-                    row = player2.row(); 
+                } // end of try/catch statement
 
-                    col = player2.col();
+            } // end of while loop
 
-                    try {
+            System.out.println("Do you want to play again? Type true for yes. Type false for no.\n");
 
-                        board.checkBoard(row, col);
+            playAgain = input.nextBoolean();
 
-                        board.addMarker(row, col, player2.getMarker());
+            if (playAgain) {
 
-                        board.printBoard();
+                board.clearBoard();
 
-                        win = board.checkWin(player2.getMarker());
-
-                        if (win) {
-
-                            System.out.println("\nPlayer 2 wins!\n");
-
-                        } // end of if statement
-
-                        currentPlayer = 1;
-
-                    }
-                    catch (Exception c) {
-                        
-                        //System.err.println(c.getMessage());
-
-                    } // end of try/catch statement
-
-                } 
-                else {
-
-                    throw new Exception("Invalid Player.");
-
-                } // end of if/else statement
-
-            }
-            catch (Exception p) {
-
-                System.out.println(p.getMessage());
-
-            } // end of try/catch statement
+            } // end of if statement
 
         } // end of while loop
 
@@ -293,99 +327,129 @@ class Game {
 
         Player player1 = new ComputerPlayer("X", "Player 1");
         Player player2 = new ComputerPlayer("O", "Player 2");
-                
-        board.printBoard();
 
-        int row = 0;
-        int col = 0;
+        boolean playAgain = true;
 
-        int currentPlayer = 1;
+        while (playAgain) {
+                    
+            int row = 0;
+            int col = 0;
 
-        boolean win = false;
+            int currentPlayer = 1;
 
-        while (!win) {
+            boolean win = false;
 
-            try {
+            while (!win) {
 
-                if (currentPlayer == 1) {
+                try {
 
-                    System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
+                    if (currentPlayer == 1) {
 
-                    row = player1.row();
+                        System.out.println("\nComputer 1\n");
 
-                    col = player1.col();
+                        boolean valid = false;
 
-                    try {
+                        while (!valid) {
 
-                        board.checkBoard(row, col);
+                            try {
 
-                        board.addMarker(row, col, player1.getMarker());
+                                row = player1.row();
 
-                        board.printBoard();
+                                col = player1.col();
 
-                        win = board.checkWin(player1.getMarker());
+                                board.checkBoard(row, col);
 
-                        if (win) {
+                                board.addMarker(row, col, player1.getMarker());
 
-                            System.out.println("\nPlayer 1 wins!\n");
+                                board.printBoard();
 
-                        } // end of if statement
+                                win = board.checkWin(player1.getMarker());
 
-                        currentPlayer = 2;
+                                valid = true;
 
-                    }
-                    catch (Exception x) {
+                                if (win) {
+
+                                    System.out.println("\nComputer 1 wins!\n");
+
+                                } // end of if statement
+
+                                currentPlayer = 2;
+
+                            }
+                            catch (Exception x) {
+                                
+                                //System.err.println(x.getMessage());
+
+                            } // end of try/catch statement
                         
-                        //System.err.println(x.getMessage());
+                        } // end of while loop
+                    }
+                    else if (currentPlayer == 2) {
 
-                    } // end of try/catch statement
+                        System.out.println("\nComputer 2\n");
+
+                        boolean valid = false;
+                        
+                        while (!valid) {
+
+                            try {
+
+                                row = player2.row(); 
+
+                                col = player2.col();
+
+                                board.checkBoard(row, col);
+
+                                board.addMarker(row, col, player2.getMarker());
+
+                                board.printBoard();
+
+                                win = board.checkWin(player2.getMarker());
+
+                                valid = true;
+
+                                if (win) {
+
+                                    System.out.println("\nComputer 2 wins!\n");
+
+                                } // end of if statement
+
+                                currentPlayer = 1;
+
+                            }
+                            catch (Exception c) {
+                                
+                                //System.err.println(c.getMessage());
+
+                            } // end of try/catch statement
+                        
+                        } // end of while loop
+
+                    } 
+                    else {
+
+                        throw new Exception("Invalid Player.");
+
+                    } // end of if/else statement
+
                 }
-                else if (currentPlayer == 2) {
+                catch (Exception p) {
 
-                    System.out.println("\n" + player2.getName() + ", where would you like to play?\n");
+                    System.out.println(p.getMessage());
 
-                    row = player2.row(); 
+                } // end of try/catch statement
 
-                    col = player2.col();
+            } // end of while loop
 
-                    try {
+            System.out.println("Do you want to play again? Type true for yes. Type false for no.\n");
 
-                        board.checkBoard(row, col);
+            playAgain = input.nextBoolean();
 
-                        board.addMarker(row, col, player2.getMarker());
+            if (playAgain) {
 
-                        board.printBoard();
+                board.clearBoard();
 
-                        win = board.checkWin(player2.getMarker());
-
-                        if (win) {
-
-                            System.out.println("\nPlayer 2 wins!\n");
-
-                        } // end of if statement
-
-                        currentPlayer = 1;
-
-                    }
-                    catch (Exception c) {
-                        
-                        //System.err.println(c.getMessage());
-
-                    } // end of try/catch statement
-
-                } 
-                else {
-
-                    throw new Exception("Invalid Player.");
-
-                } // end of if/else statement
-
-            }
-            catch (Exception p) {
-
-                System.out.println(p.getMessage());
-
-            } // end of try/catch statement
+            } // end of if statement
 
         } // end of while loop
 
@@ -483,6 +547,20 @@ class Board {
         } // end of if statement
 
     } // end of checkBoard method
+
+    public void clearBoard() {
+
+        for (int i = 0; i < board.length; i++) {
+
+            for (int j = 0; j < board.length; j++) {
+
+                board[i][j] = "*";
+                
+            } // end of for loop
+
+        } // end of for loop
+
+    } // end of clearBoard method
 
 } // end of Board class
     
