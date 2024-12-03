@@ -16,39 +16,21 @@ public class App {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("\nWould you like to play against a computer or a player?\nPress 1 for human.\nPress 2 for computer.");
-        System.out.println("If you would like to play computer vs. computer, press 3.\n");
-
-        int humanOrComputer = input.nextInt();
-
         boolean valid = false;
+
+        System.out.println("Welcome to TicTacToe!");
 
         while (!valid) {
 
+            System.out.println("\nWould you like to play against a computer or a player?\nPress 1 for human.\nPress 2 for computer.");
+            System.out.println("If you would like to play computer vs. computer, press 3.\n");
+
+            int humanOrComputer = input.nextInt();
+
             try {
 
-                if (humanOrComputer == 1) {
-
-                    Game game = new Game();
-                    valid = true;
-
-                }
-                else if (humanOrComputer == 2) {
-
-                    Game game = new Game(1);
-                    valid = true;
-                }
-                else if (humanOrComputer == 3) {
-
-                    Game game = new Game(true);
-                    valid = true;
-
-                }
-                else {
-
-                    throw new Exception("Invalid opponent selection.");
-
-                } // end of if/else statement
+                new Game(humanOrComputer);
+                valid = true;
 
             }
             catch (Exception t) {
@@ -68,8 +50,32 @@ public class App {
 
 class Game {
 
+    Game(int selection) throws Exception{
+
+        if (selection == 1) {
+
+            humanVsHuman();
+
+        }
+        else if (selection == 2) {
+
+            humanVsComputer();
+        }
+        else if (selection == 3) {
+
+            computerVsComputer();
+
+        }
+        else {
+
+            throw new Exception("Invalid opponent selection.");
+
+        } // end of if/else statement
+
+    } // end of Game method
+
     // plays a human vs. human game
-    Game() {
+    private void humanVsHuman() {
 
         Scanner input = new Scanner(System.in);
 
@@ -84,14 +90,12 @@ class Game {
 
             board.printBoard();
 
-            int row = 0;
-            int col = 0;
-
             int currentPlayer = 1;
 
             boolean win = false;
+            boolean tie = false;
 
-            while (!win) {
+            while (!win && !tie) {
 
                 try {
 
@@ -101,21 +105,25 @@ class Game {
 
                         try {
 
-                            row = player1.row();
+                            int[] position = player1.position();
 
-                            col = player1.col();
+                            board.checkBoard(position[0], position[1]);
 
-                            board.checkBoard(row, col);
-
-                            board.addMarker(row, col, player1.getMarker());
+                            board.addMarker(position[0], position[1], player1.getMarker());
 
                             board.printBoard();
 
                             win = board.checkWin(player1.getMarker());
+                            tie = board.checkTie();
 
                             if (win) {
 
-                                System.out.println("\nPlayer 1 wins!\n");
+                                System.out.println(player1.getName() + " wins!\n");
+
+                            } 
+                            else if (tie) {
+
+                                System.out.println("It's a tie!\n");
 
                             } // end of if statement
 
@@ -127,6 +135,7 @@ class Game {
                             System.out.println(x.getMessage());
 
                         } // end of try/catch statement
+
                     }
                     else if (currentPlayer == 2) {
 
@@ -134,21 +143,25 @@ class Game {
 
                         try {
 
-                            row = player2.row(); 
+                            int[] position = player1.position();
 
-                            col = player2.col();
+                            board.checkBoard(position[0], position[1]);
 
-                            board.checkBoard(row, col);
-
-                            board.addMarker(row, col, player2.getMarker());
+                            board.addMarker(position[0], position[1], player2.getMarker());
 
                             board.printBoard();
 
                             win = board.checkWin(player2.getMarker());
+                            tie = board.checkTie();
 
                             if (win) {
 
-                                System.out.println("\nPlayer 2 wins!\n");
+                                System.out.println(player2.getName() + " wins!\n");
+
+                            } 
+                            else if (tie) {
+
+                                System.out.println("It's a tie!\n");
 
                             } // end of if statement
 
@@ -194,7 +207,7 @@ class Game {
     } // end of Game method
 
     // plays a human vs. computer game
-    Game(int selection) {
+    private void humanVsComputer() {
 
         Scanner input = new Scanner(System.in);
 
@@ -209,14 +222,12 @@ class Game {
 
             board.printBoard();
 
-            int row = 0;
-            int col = 0;
-
             int currentPlayer = 1;
 
             boolean win = false;
+            boolean tie = false;
 
-            while (!win) {
+            while (!win  && !tie) {
 
                 try {
 
@@ -226,21 +237,25 @@ class Game {
 
                         try {
 
-                            row = player1.row();
+                            int[] position = player1.position();
 
-                            col = player1.col();
+                            board.checkBoard(position[0], position[1]);
 
-                            board.checkBoard(row, col);
-
-                            board.addMarker(row, col, player1.getMarker());
+                            board.addMarker(position[0], position[1], player1.getMarker());
 
                             board.printBoard();
 
                             win = board.checkWin(player1.getMarker());
+                            tie = board.checkTie();
 
                             if (win) {
 
                                 System.out.println("\nPlayer 1 wins!\n");
+
+                            }
+                            else if (tie) {
+
+                                System.out.println("It's a tie!\n");
 
                             } // end of if statement
 
@@ -259,21 +274,25 @@ class Game {
 
                         try {
 
-                            row = player2.row(); 
+                            int[] position = player2.position();
 
-                            col = player2.col();
+                            board.checkBoard(position[0], position[1]);
 
-                            board.checkBoard(row, col);
-
-                            board.addMarker(row, col, player2.getMarker());
+                            board.addMarker(position[0], position[1], player2.getMarker());
 
                             board.printBoard();
 
                             win = board.checkWin(player2.getMarker());
+                            tie = board.checkTie();
 
                             if (win) {
 
                                 System.out.println("\nPlayer 2 wins!\n");
+
+                            }
+                            else if (tie) {
+
+                                System.out.println("It's a tie!\n");
 
                             } // end of if statement
 
@@ -319,7 +338,7 @@ class Game {
     } // end of Game method
 
     // plays a computer vs. computer game
-    Game(boolean selection) {
+    private void computerVsComputer() {
 
         Scanner input = new Scanner(System.in);
 
@@ -331,15 +350,13 @@ class Game {
         boolean playAgain = true;
 
         while (playAgain) {
-                    
-            int row = 0;
-            int col = 0;
 
             int currentPlayer = 1;
 
             boolean win = false;
+            boolean tie = false;
 
-            while (!win) {
+            while (!win && !tie) {
 
                 try {
 
@@ -353,17 +370,16 @@ class Game {
 
                             try {
 
-                                row = player1.row();
+                                int[] position = player1.position();
 
-                                col = player1.col();
+                                board.checkBoard(position[0], position[1]);
 
-                                board.checkBoard(row, col);
-
-                                board.addMarker(row, col, player1.getMarker());
+                                board.addMarker(position[0], position[1], player1.getMarker());
 
                                 board.printBoard();
 
                                 win = board.checkWin(player1.getMarker());
+                                tie = board.checkTie();
 
                                 valid = true;
 
@@ -371,7 +387,12 @@ class Game {
 
                                     System.out.println("\nComputer 1 wins!\n");
 
-                                } // end of if statement
+                                } 
+                                else if (tie) {
+
+                                    System.out.println("It's a tie!\n");
+
+                                } // end of if/else statement
 
                                 currentPlayer = 2;
 
@@ -394,17 +415,16 @@ class Game {
 
                             try {
 
-                                row = player2.row(); 
+                                int[] position = player2.position();
 
-                                col = player2.col();
-
-                                board.checkBoard(row, col);
-
-                                board.addMarker(row, col, player2.getMarker());
+                                board.checkBoard(position[0], position[1]);
+    
+                                board.addMarker(position[0], position[1], player2.getMarker());
 
                                 board.printBoard();
 
                                 win = board.checkWin(player2.getMarker());
+                                tie = board.checkTie();
 
                                 valid = true;
 
@@ -412,7 +432,12 @@ class Game {
 
                                     System.out.println("\nComputer 2 wins!\n");
 
-                                } // end of if statement
+                                } 
+                                else if (tie) {
+
+                                    System.out.println("It's a tie!\n");
+
+                                } // end of if/else statement
 
                                 currentPlayer = 1;
 
@@ -484,9 +509,7 @@ abstract class Player {
 
     } // end of getMarker method
 
-    abstract int row() throws Exception;
-
-    abstract int col() throws Exception;
+    abstract int[] position() throws Exception;
 
 } // end of Player class
 
@@ -562,6 +585,28 @@ class Board {
 
     } // end of clearBoard method
 
+    public boolean checkTie() {
+
+        boolean tie = true;
+
+        for (int i = 0; i < board.length; i++) {
+
+            for (int j = 0; j < board.length; j++) {
+
+                if (board[i][j] == "*") {
+
+                    tie = false;
+
+                }
+                
+            } // end of for loop
+
+        } // end of for loop
+
+        return tie;
+
+    } // end of checkTie method
+
 } // end of Board class
     
     
@@ -575,7 +620,7 @@ class HumanPlayer extends Player {
 
     } // end of HumanPlayer method
 
-    int row() throws Exception {
+    int[] position() throws Exception {
 
         System.out.println("Row: ");
         int row = input.nextInt();
@@ -589,17 +634,11 @@ class HumanPlayer extends Player {
 
         } // end of if statement
 
-        return row;
-
-    } // end of row method
-
-    int col() throws Exception {
-
         System.out.println("Column: ");
         int col = input.nextInt();
 
-        // assume user will enter columns as 1, 2, or 3
-        col = col - 1;
+        // assume user will enter rows as 1, 2, or 3
+        row = col - 1; 
 
         if (col >= 3) {
 
@@ -607,9 +646,11 @@ class HumanPlayer extends Player {
 
         } // end of if statement
 
-        return col;
+        int[] position = {row, col};
 
-    } // end of col method
+        return position;
+
+    } // end of row method
 
 } // end of HumanPlayer class
 
@@ -624,21 +665,16 @@ class ComputerPlayer extends Player {
 
     } // end of ComputerPlayer method
 
-    int row() throws Exception {
-        
+    int[] position() throws Exception {
+
         int row = random.nextInt(3);
-
-        return row;
-
-    } // end of row method
-
-    int col() throws Exception {
-
         int col = random.nextInt(3);
 
-        return col;
+        int[] position = {row, col};
 
-    } // end of col method
+        return position;
+
+    } // end of position method
 
 } // end of ComputerPlayer class
 
@@ -694,7 +730,7 @@ class ImprovedBoard extends Board {
 
             result = true;
 
-        }
+        } // end of if/else if statement
 
     return result;
 
