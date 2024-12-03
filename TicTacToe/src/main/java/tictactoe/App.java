@@ -16,7 +16,7 @@ public class App {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Would you like to play against a computer or a player?\nPress 1 for human.\nPress 2 for computer.");
+        System.out.println("\nWould you like to play against a computer or a player?\nPress 1 for human.\nPress 2 for computer.");
         System.out.println("If you would like to play computer vs. computer, press 3.\n");
 
         int humanOrComputer = input.nextInt();
@@ -26,7 +26,7 @@ public class App {
         while (!valid) {
 
             try {
-                
+
                 if (humanOrComputer == 1) {
 
                     Game game = new Game();
@@ -35,13 +35,13 @@ public class App {
                 }
                 else if (humanOrComputer == 2) {
 
-                    Game game = new Game();
+                    Game game = new Game(1);
                     valid = true;
-
                 }
                 else if (humanOrComputer == 3) {
 
-                    Game game = new Game();
+                    Game game = new Game(true);
+                    valid = true;
 
                 }
                 else {
@@ -74,6 +74,222 @@ class Game {
 
         Player player1 = new HumanPlayer("X", "Player 1");
         Player player2 = new HumanPlayer("O", "Player 2");
+                
+        board.printBoard();
+
+        int row = 0;
+        int col = 0;
+
+        int currentPlayer = 1;
+
+        boolean win = false;
+
+        while (!win) {
+
+            try {
+
+                if (currentPlayer == 1) {
+
+                    System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
+
+                    row = player1.row();
+
+                    col = player1.col();
+
+                    try {
+
+                        board.checkBoard(row, col);
+
+                        board.addMarker(row, col, player1.getMarker());
+
+                        board.printBoard();
+
+                        win = board.checkWin(player1.getMarker());
+
+                        if (win) {
+
+                            System.out.println("Player 1 wins!\n");
+
+                        } // end of if statement
+
+                        currentPlayer = 2;
+
+                    }
+                    catch (Exception x) {
+                        
+                        System.out.println(x.getMessage());
+
+                    } // end of try/catch statement
+                }
+                else if (currentPlayer == 2) {
+
+                    System.out.println("\n" + player2.getName() + ", where would you like to play?\n");
+
+                    row = player2.row(); 
+
+                    col = player2.col();
+
+                    try {
+
+                        board.checkBoard(row, col);
+
+                        board.addMarker(row, col, player2.getMarker());
+
+                        board.printBoard();
+
+                        win = board.checkWin(player2.getMarker());
+
+                        if (win) {
+
+                            System.out.println("Player 2 wins!\n");
+
+                        } // end of if statement
+
+                        currentPlayer = 1;
+
+                    }
+                    catch (Exception c) {
+                        
+                        System.out.println(c.getMessage());
+
+                    } // end of try/catch statement
+
+                } 
+                else {
+
+                    throw new Exception("Invalid Player.");
+
+                } // end of if/else statement
+
+            }
+            catch (Exception p) {
+
+                System.out.println(p.getMessage());
+
+            } // end of try/catch statement
+
+        } // end of while loop
+
+        input.close();
+
+    } // end of Game method
+
+    Game(int selection) {
+
+        Scanner input = new Scanner(System.in);
+
+        ImprovedBoard board = new ImprovedBoard();
+
+        Player player1 = new HumanPlayer("X", "Player 1");
+        Player player2 = new ComputerPlayer("O", "Player 2");
+                
+        board.printBoard();
+
+        int row = 0;
+        int col = 0;
+
+        int currentPlayer = 1;
+
+        boolean win = false;
+
+        while (!win) {
+
+            try {
+
+                if (currentPlayer == 1) {
+
+                    System.out.println("\n" + player1.getName() + ", where would you like to play?\n");
+
+                    row = player1.row();
+
+                    col = player1.col();
+
+                    try {
+
+                        board.checkBoard(row, col);
+
+                        board.addMarker(row, col, player1.getMarker());
+
+                        board.printBoard();
+
+                        win = board.checkWin(player1.getMarker());
+
+                        if (win) {
+
+                            System.out.println("Player 1 wins!\n");
+
+                        } // end of if statement
+
+                        currentPlayer = 2;
+
+                    }
+                    catch (Exception x) {
+                        
+                        System.out.println(x.getMessage());
+
+                    } // end of try/catch statement
+                }
+                else if (currentPlayer == 2) {
+
+                    System.out.println("\n" + player2.getName() + ", where would you like to play?\n");
+
+                    row = player2.row(); 
+
+                    col = player2.col();
+
+                    try {
+
+                        board.checkBoard(row, col);
+
+                        board.addMarker(row, col, player2.getMarker());
+
+                        board.printBoard();
+
+                        win = board.checkWin(player2.getMarker());
+
+                        if (win) {
+
+                            System.out.println("Player 2 wins!\n");
+
+                        } // end of if statement
+
+                        currentPlayer = 1;
+
+                    }
+                    catch (Exception c) {
+                        
+                        System.out.println(c.getMessage());
+
+                    } // end of try/catch statement
+
+                } 
+                else {
+
+                    throw new Exception("Invalid Player.");
+
+                } // end of if/else statement
+
+            }
+            catch (Exception p) {
+
+                System.out.println(p.getMessage());
+
+            } // end of try/catch statement
+
+        } // end of while loop
+
+        input.close();
+
+    } // end of Game method
+
+    Game(boolean selection) {
+
+        Scanner input = new Scanner(System.in);
+
+        ImprovedBoard board = new ImprovedBoard();
+
+        Player player1 = new ComputerPlayer("X", "Player 1");
+        Player player2 = new ComputerPlayer("O", "Player 2");
                 
         board.printBoard();
 
@@ -329,7 +545,7 @@ class ComputerPlayer extends Player {
 
     int row() throws Exception {
         
-        int row = random.nextInt(4);
+        int row = random.nextInt(3);
 
         return row;
 
@@ -337,7 +553,7 @@ class ComputerPlayer extends Player {
 
     int col() throws Exception {
 
-        int col = random.nextInt(4);
+        int col = random.nextInt(3);
 
         return col;
 
@@ -378,7 +594,7 @@ class ImprovedBoard extends Board {
             result = true;
 
         }
-        else if (board[0][2] == marker && board[1][1] == marker && board[2][1] == marker) {
+        else if (board[0][2] == marker && board[1][1] == marker && board[2][0] == marker) {
 
             result = true;
 
