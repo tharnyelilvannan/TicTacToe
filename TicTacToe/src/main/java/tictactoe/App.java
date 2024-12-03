@@ -24,7 +24,9 @@ public class App {
         boolean valid = false;
 
         while (!valid) {
+
             try {
+                
                 if (humanOrComputer == 1) {
 
                     Game game = new Game();
