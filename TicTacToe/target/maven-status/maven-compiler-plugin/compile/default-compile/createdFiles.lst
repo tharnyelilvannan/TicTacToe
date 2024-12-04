@@ -1,7 +1,7 @@
-tictactoe\ComputerPlayer.class
-tictactoe\App.class
-tictactoe\Game.class
-tictactoe\Player.class
-tictactoe\HumanPlayer.class
-tictactoe\ImprovedBoard.class
-tictactoe\Board.class
+main\java\project1\ComputerPlayer.class
+main\java\project1\HumanPlayer.class
+main\java\project1\Board.class
+main\java\project1\Game.class
+main\java\project1\Player.class
+main\java\project1\ImprovedBoard.class
+project1\App.class
